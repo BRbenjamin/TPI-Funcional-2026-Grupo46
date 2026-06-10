@@ -49,6 +49,7 @@
 	)
 )
 
+; Funcion auxiliar para calcular el cambio de color del semaforo. 
 (defun calcular-tiempo (tiempo)
 
 	(let ((ciclo-semaforo 216))
