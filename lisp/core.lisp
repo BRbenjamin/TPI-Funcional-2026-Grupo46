@@ -18,7 +18,7 @@
 )
 
 ;2do requerimiento: Temporizador Automático
-(defun timer(tiempo_actual)
+(defun temporizador(tiempo_actual)
 	(cond
 		((and (>= (mod tiempo_actual 216) 0) (<= (mod tiempo_actual 216) 89)) 'rojo)
 		((and (>= (mod tiempo_actual 216) 90) (<= (mod tiempo_actual 216) 95)) 'amarillo)
