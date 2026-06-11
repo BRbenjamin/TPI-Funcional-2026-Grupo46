@@ -62,3 +62,10 @@
 		)
 	)
 )
+;4.a
+(defun duracion-ciclo(tiempo-ciclo)
+	(cond
+		((and(>= tiempo-ciclo 35) (<= tiempo-ciclo 150)) T)
+		(t nil)
+	)
+)
