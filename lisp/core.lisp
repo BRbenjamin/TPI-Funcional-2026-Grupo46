@@ -1,9 +1,9 @@
-;1er requerimiento: Estados de Transición
+;1er Requerimiento: Estados de Transición
 (defun transicion(estado_actual color-cambiar)
 	(cond
-		((and(equal estado_actual 'en-rojo)(equal color-cambiar 'amarillo)) 
-			(list estado_actual (format nil "cambiar-a-~a" color-cambiar)))
 		((and(equal estado_actual 'en-rojo)(equal color-cambiar 'verde)) 
+			(list estado_actual (format nil "cambiar-a-~a" color-cambiar)))
+		((and(equal estado_actual 'en-Verde)(equal color-cambiar 'amarillo)) 
 			(list estado_actual (format nil "cambiar-a-~a" color-cambiar)))
 		((and(equal estado_actual 'en-amarillo)(equal color-cambiar 'rojo)) 
 			(list estado_actual (format nil "cambiar-a-~a" color-cambiar)))
@@ -17,7 +17,10 @@
 	)
 )
 
-;2do requerimiento: Temporizador Automático
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+
+;2do Requerimiento: Temporizador Automático
 (defun temporizador(tiempo_actual)
 	(cond
 		((and (>= (mod tiempo_actual 216) 0) (<= (mod tiempo_actual 216) 89)) 'rojo)
@@ -26,7 +29,10 @@
 	)
 )
 
-; 3er requerimiento: Auditoria
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+
+; 3er Requerimiento: Auditoria
 (ql:quickload "local-time")
 
  (defun Auditoria()
@@ -62,6 +68,10 @@
 		)
 	)
 )
+
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+;4to Requerimiento: Análisis de Ciclos Semafóricos
 ;4.a
 (defun duracion-ciclo(tiempo-ciclo)
 	(cond
@@ -69,3 +79,39 @@
 		(t nil)
 	)
 )
+
+
+
+
+
+
+
+
+
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+
+; 5to Requerimiento: Planificación Temporal
+
+
+
+
+
+
+
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+;6to Requerimiento: Informe de Distribución Temporal
+
+
+
+
+
+
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+;7to Requerimiento: Aseguramiento de la calidad
+
+
+
+
