@@ -35,23 +35,24 @@
 ; 3er Requerimiento: Auditoria
 (ql:quickload "local-time")
 
- (defun Auditoria()
+(defun Auditoria()
 
-	(let ((id) (clave) (tiempo))
 		(print "Ingrese su ID: ")
-			(setq id(read))
+			(let ((id (read)))
 		(print "Ingrese la clave: ")
-			(setq clave(read))
+			(let ((clave(read)))
 
 			(if (equal clave 1234)
 
 				(progn
 					(print "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
-						(setq tiempo(read))
+						(let ((tiempo(read)))
 					(list (local-time:format-timestring nil
 					 								(local-time:unix-to-timestamp tiempo) :format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec))
 																    (calcular-tiempo  tiempo)))
+				)
 			)
+		)
 	)
 )
 
