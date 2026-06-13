@@ -128,6 +128,32 @@
 ;------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------
 ;7to Requerimiento: Aseguramiento de la calidad
+;Punto 1
+;(transicion 'en-Rojo 'verde)  ; Ejemplo Valido
+;(transicion 'en-Rojo 'amarillo) ; Ejemplo Valido
+;(transicion 'en-Rojo 0) ; Ejemplo Error
+
+; Punto 2
+;(timer 10000) ; Ejemplo Valido
+;(timer 12300) ; Ejemplo Valido
+;(timer i) ; Ejemplo Error
+
+; Punto 3
+;1717958400 ; Ejemplo Valido
+;1781621963 ; Ejemplo Valido
+; d124232 ; Ejemplo Error
+
+; Punto 4
+;(duracion-ciclo 140) ; Ejemplo Valido
+;(duracion-ciclo 260) ; Ejemplo Valido
+;(duracion-ciclo e) ; Ejemplo Error
+
+; Punto 5
+;(ciclos-por-tiempo 15); Ejemplo Valido
+;(ciclos-por-tiempo 20); Ejemplo Valido
+;(ciclos-por-tiempo d); Ejemplo Error
+
+
 
 
 
