@@ -93,7 +93,18 @@
 
 ; 5to Requerimiento: Planificación Temporal
 
+(defun ciclos-por-tiempo(minutos)
 
+	(let ((segundos-ciclo 216))
+
+		(cond
+			((= (mod (* minutos 60) segundos-ciclo) 0) (format nil "Ciclos Completados: ~a" (/ (* minutos 60)  segundos-ciclo))) ; si es 0 el resto, el ultimo ciclo fue completado
+			((> (mod (* minutos 60) segundos-ciclo) 0) (format nil "Ciclos Completados: ~a.Para completar el siguiente ciclo quedan: ~a segundos"
+													   (floor (/ (* minutos 60) segundos-ciclo)) (- segundos-ciclo (mod (* minutos 60) segundos-ciclo)))) ; si NO fue completado, que diga cuantos segundos transcurrieron
+			(t (list "Datos no Validos"))
+		)
+	)
+)
 
 
 
@@ -102,7 +113,6 @@
 ;------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------
 ;6to Requerimiento: Informe de Distribución Temporal
-
 
 
 
