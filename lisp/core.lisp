@@ -79,14 +79,14 @@
 		(t nil)
 	)
 )
+;4.b
+(defun recomendacion-ciclo(ciclo)
 
-
-
-
-
-
-
-
+	(cond
+		((< ciclo 35) (format nil "Recomendacion: Aumentar ~a segundos" (- 35 ciclo)))
+		((> ciclo 150) (format nil "Recomendacion: Recortar ~a segundos" (- ciclo 150)))
+	)
+)
 
 ;------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------
