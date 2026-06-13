@@ -38,8 +38,8 @@
 (defun Timer(tiempo_actual)
 	(cond
 		((and (>= (mod tiempo_actual 216) 0) (<= (mod tiempo_actual 216) 89)) 'rojo)
-		((and (>= (mod tiempo_actual 216) 90) (<= (mod tiempo_actual 216) 95)) 'amarillo)
-		((and (>= (mod tiempo_actual 216) 96) (<= (mod tiempo_actual 216) 215)) 'verde)
+		((and (>= (mod tiempo_actual 216) 90) (<= (mod tiempo_actual 216) 209)) 'amarillo)
+		((and (>= (mod tiempo_actual 216) 210) (<= (mod tiempo_actual 216) 215)) 'verde)
 	)
 )
 
