@@ -14,12 +14,12 @@
 			(list estado_actual (format nil "cambiar-a-~a" color-cambiar)))
 		((and(equal estado_actual 'en-amarillo)(equal color-cambiar 'rojo)) 
 			(list estado_actual (format nil "cambiar-a-~a" color-cambiar)))
-		((and(equal estado_actual 'en-amarillo)(equal color-cambiar 'rojo))
+		((and (equal color-Actual 'en-Verde) (equal cambiar-a 'rojo)) ;cambio NO valido
 			(list color-Actual "Cambio esperado: AMARILLO"))
-		((and(equal estado_actual 'en-amarillo)(equal color-cambiar 'rojo))
-			(list color-Actual "Cambio esperado: AMARILLO"))
-		((and(equal estado_actual 'en-amarillo)(equal color-cambiar 'rojo)) 
-			(list color-Actual "Cambio esperado: AMARILLO"))
+		((and (equal color-Actual 'en-Amarillo) (equal cambiar-a 'verde)) ;cambio NO valido
+			(list color-Actual "Cambio esperado: ROJO"))
+		((and (equal color-Actual 'en-Rojo) (equal cambiar-a 'amarillo)) ;cambio NO valido
+			(list color-Actual "Cambio esperado: VERDE"))
 		(t (list "Datos no Validos"))
 	)
 )
