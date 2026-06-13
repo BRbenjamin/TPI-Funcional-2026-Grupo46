@@ -1,4 +1,11 @@
 ;1er Requerimiento: Estados de Transición
+; ----------------------------------------------------------------------------
+; Funcion: Transicion
+; Naturaleza: Impura (Pasados "color-Actual" y "cambiar-a", imprime en pantalla, si la opcion es valida)
+; Estrategia: Utilizacion de la Condicional Cond.
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
+
 (defun transicion(estado_actual color-cambiar)
 	(cond
 		((and(equal estado_actual 'en-rojo)(equal color-cambiar 'verde)) 
@@ -21,7 +28,14 @@
 ;------------------------------------------------------------------------------------------------------
 
 ;2do Requerimiento: Temporizador Automático
-(defun temporizador(tiempo_actual)
+; ----------------------------------------------------------------------------
+; Funcion: Timer
+; Naturaleza: Pura (Pasada una cantidad de tiempo en formato Unix, devuelve en que color estaria el semaforo)
+; Estrategia: Utilizacion de la Condicional Cond para clasificar los posibles colores del semaforo, en conjunto con la funcion Mod, para que segun el resto que devuelva, indique el color en el que esta el semaforo.
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
+
+(defun Timer(tiempo_actual)
 	(cond
 		((and (>= (mod tiempo_actual 216) 0) (<= (mod tiempo_actual 216) 89)) 'rojo)
 		((and (>= (mod tiempo_actual 216) 90) (<= (mod tiempo_actual 216) 95)) 'amarillo)
@@ -33,6 +47,12 @@
 ;------------------------------------------------------------------------------------------------------
 
 ; 3er Requerimiento: Auditoria
+; ----------------------------------------------------------------------------
+; Funcion: Auditoria
+; Naturaleza: Impura (Ingreso de datos a través de un loggin)
+; Estrategia: Mediante la biblioteca "local-time" obtener la fecha pasada por medio de tiempo Unix.
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
 (ql:quickload "local-time")
 
 (defun Auditoria()
