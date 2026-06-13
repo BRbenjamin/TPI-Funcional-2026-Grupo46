@@ -35,11 +35,14 @@
 ; Impacto: No Destructiva
 ; ----------------------------------------------------------------------------
 
-(defun Timer(tiempo_actual)
-	(cond
-		((and (>= (mod tiempo_actual 216) 0) (<= (mod tiempo_actual 216) 89)) 'rojo)
-		((and (>= (mod tiempo_actual 216) 90) (<= (mod tiempo_actual 216) 209)) 'amarillo)
-		((and (>= (mod tiempo_actual 216) 210) (<= (mod tiempo_actual 216) 215)) 'verde)
+(defun Temporizador(tiempo_Unix)
+
+	(let ((duracion_Ciclo 216)) ; tiempo del ciclo completo	
+		(cond
+			((and (>= (mod tiempo_Unix duracion_Ciclo) 0) (<= (mod tiempo_Unix duracion_Ciclo) 89)) 'Rojo)
+			((and (>= (mod tiempo_Unix duracion_Ciclo) 90) (<= (mod tiempo_Unix duracion_Ciclo) 209))  'Verde)
+			((and (>= (mod tiempo_Unix duracion_Ciclo) 210) (<= (mod tiempo_Unixduracion_Ciclo) 215)) 'Amarillo)
+		)
 	)
 )
 
