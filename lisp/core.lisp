@@ -179,7 +179,86 @@
 ;(ciclos-por-tiempo d); Ejemplo Error
 
 
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+;                                         ITERACION 2
+
+
+; Extension 1
 
 
 
 
+
+
+
+
+
+
+
+
+
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+; Extension 2
+
+(ql:quickload "local-time")
+
+(defun informe(datos)
+
+	(with-open-file (stream "informe-ejecucion-semaforo.txt" ; Poner direccion de archivo.
+					 :direction :output :if-exists :append)
+
+		(format stream "~%Informe de Ejecucion del Sistema Semaforico~%")
+		
+		(format stream "~a - [~a] --- Transición: ~a~%" (cadr datos) (car datos) (caddr datos))
+		(format stream "=========================================================")
+	)
+)
+
+; Funcion Principal ->
+
+(defun Auditoria()
+
+		(print "Ingrese su ID: ")
+			(let ((id (read)))
+		(print "Ingrese la clave: ")
+			(let ((clave(read)))
+
+			(if (equal clave 1234)
+
+				(progn
+					(print "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
+						(let ((tiempo(read)))
+					(let ((guardar-info
+								(list (format nil "Usuario: ~a|| Tiempo Unix ingresado: ~a" id tiempo)  (local-time:format-timestring nil
+										 								(local-time:unix-to-timestamp tiempo) :format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec))
+																					    (calcular-tiempo  tiempo))))
+						(informe guardar-info)
+						guardar-info	
+					)
+				)
+			)
+		)
+	)
+	)
+)
+
+; Calculamos con la modificacion de la Extension 1
+(defun calcular-tiempo (tiempo)
+
+	(let ((ciclo-semaforo 225))
+		(cond
+			((and (>= (mod tiempo ciclo-semaforo) 0) (<= (mod tiempo ciclo-semaforo) 89))  "La luz ha cambiado de Amarillo a Rojo")
+			((and (>= (mod tiempo ciclo-semaforo) 90) (<= (mod tiempo ciclo-semaforo) 92)) "Luz Intermitente en Rojo cambiando a Verde")
+
+			((and (>= (mod tiempo ciclo-semaforo) 93) (<= (mod tiempo ciclo-semaforo) 212))  "La luz ha cambiado de Rojo a Verde")	
+			((and (>= (mod tiempo ciclo-semaforo) 213) (<= (mod tiempo ciclo-semaforo) 215)) "Luz Intermitente en Verde cambiando a Amarillo")
+
+			((and (>= (mod tiempo ciclo-semaforo) 216) (<= (mod tiempo ciclo-semaforo) 221))  "La luz ha cambiado de Verde a Amarillo")
+			((and (>= (mod tiempo ciclo-semaforo) 222) (<= (mod tiempo ciclo-semaforo) 224))  "Luz Intermitente en Amarillo cambiando a Rojo")
+		)
+	)
+)
+
+(Auditoria)
