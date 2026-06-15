@@ -1,4 +1,7 @@
+;Extensión 1
+
 (ql:quickload "local-time")
+
 ;1er Requerimiento: Estados de Transición
 ; ----------------------------------------------------------------------------
 ; Funcion: Transicion
@@ -62,39 +65,41 @@
 ; Estrategia: Mediante la biblioteca "local-time" obtener la fecha pasada por medio de tiempo Unix.
 ; Impacto: No Destructiva
 ; ----------------------------------------------------------------------------
-(ql:quickload "local-time")
 
 (defun Auditoria()
 
-		(print "Ingrese su ID: ")
+		(format t "Ingrese su ID: ")
+		(finish-output)
 			(let ((id (read)))
-		(print "Ingrese la clave: ")
+		(format t "Ingrese la clave(1234): ")
+		(finish-output)
 			(let ((clave(read)))
-
 			(if (equal clave 1234)
-
 				(progn
-					(print "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
-						(let ((tiempo(read)))
+				  (format t "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
+				  (finish-output)
+					(let ((tiempo(read)))
 					(list (local-time:format-timestring nil
-					 								(local-time:unix-to-timestamp tiempo) :format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec))
-																    (calcular-tiempo  tiempo)))
+					(local-time:unix-to-timestamp tiempo) :format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec))
+					(calcular-tiempo  tiempo)))
 				)
 			)
 		)
 	)
 )
 
-; Funcion auxiliar para calcular el cambio de color del semaforo. 
 (defun calcular-tiempo (tiempo)
 
-	(let ((ciclo-semaforo 216))
+	(let ((ciclo-semaforo 225))
 		(cond
 			((and (>= (mod tiempo ciclo-semaforo) 0) (<= (mod tiempo ciclo-semaforo) 89))  "La luz ha cambiado de Amarillo a Rojo")
+			((and (>= (mod tiempo ciclo-semaforo) 90) (<= (mod tiempo ciclo-semaforo) 92)) "Luz Intermitente en Rojo cambiando a Verde")
 
-			((and (>= (mod tiempo ciclo-semaforo) 90) (<= (mod tiempo ciclo-semaforo) 209))  "La luz ha cambiado de Rojo a Verde")	
-			
-			((and (>= (mod tiempo ciclo-semaforo) 210) (<= (mod tiempo ciclo-semaforo) 215))  "La luz ha cambiado de Verde a Amarillo")
+			((and (>= (mod tiempo ciclo-semaforo) 93) (<= (mod tiempo ciclo-semaforo) 212))  "La luz ha cambiado de Rojo a Verde")	
+			((and (>= (mod tiempo ciclo-semaforo) 213) (<= (mod tiempo ciclo-semaforo) 215)) "Luz Intermitente en Verde cambiando a Amarillo")
+
+			((and (>= (mod tiempo ciclo-semaforo) 216) (<= (mod tiempo ciclo-semaforo) 221))  "La luz ha cambiado de Verde a Amarillo")
+			((and (>= (mod tiempo ciclo-semaforo) 222) (<= (mod tiempo ciclo-semaforo) 224))  "Luz Intermitente en Amarillo cambiando a Rojo")
 		)
 	)
 )
@@ -184,28 +189,6 @@
 ;(ciclos-por-tiempo 20); Ejemplo Valido
 ;(ciclos-por-tiempo d); Ejemplo Error
 
-
-;------------------------------------------------------------------------------------------------------
-;------------------------------------------------------------------------------------------------------
-;                                         ITERACION 2
-
-
-; Extension 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-;------------------------------------------------------------------------------------------------------
-;------------------------------------------------------------------------------------------------------
 ; Extension 2
 
 (ql:quickload "local-time")
@@ -213,7 +196,9 @@
 (defun informe(datos)
 
 	(with-open-file (stream "informe-ejecucion-semaforo.txt" ; Poner direccion de archivo.
-					 :direction :output :if-exists :append)
+		             :direction :output 
+					 :if-exists :supersede       ;si ya existia lo reemplaza
+                     :if-does-not-exist :create) ;si no existe crea uno nuevo
 
 		(format stream "~%Informe de Ejecucion del Sistema Semaforico~%")
 		
@@ -222,19 +207,20 @@
 	)
 )
 
-; Funcion Principal ->
+(defun Auditoria2()
 
-(defun Auditoria()
-
-		(print "Ingrese su ID: ")
+		(format t "Ingrese su ID: ")
+		(finish-output)
 			(let ((id (read)))
-		(print "Ingrese la clave: ")
+		(format t "Ingrese la clave(1234): ")
+		(finish-output)
 			(let ((clave(read)))
 
 			(if (equal clave 1234)
 
 				(progn
-					(print "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
+					(format t "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
+					(finish-output)
 						(let ((tiempo(read)))
 					(let ((guardar-info
 								(list (format nil "Usuario: ~a|| Tiempo Unix ingresado: ~a" id tiempo)  (local-time:format-timestring nil
@@ -251,20 +237,3 @@
 )
 
 ; Calculamos con la modificacion de la Extension 1
-(defun calcular-tiempo (tiempo)
-
-	(let ((ciclo-semaforo 225))
-		(cond
-			((and (>= (mod tiempo ciclo-semaforo) 0) (<= (mod tiempo ciclo-semaforo) 89))  "La luz ha cambiado de Amarillo a Rojo")
-			((and (>= (mod tiempo ciclo-semaforo) 90) (<= (mod tiempo ciclo-semaforo) 92)) "Luz Intermitente en Rojo cambiando a Verde")
-
-			((and (>= (mod tiempo ciclo-semaforo) 93) (<= (mod tiempo ciclo-semaforo) 212))  "La luz ha cambiado de Rojo a Verde")	
-			((and (>= (mod tiempo ciclo-semaforo) 213) (<= (mod tiempo ciclo-semaforo) 215)) "Luz Intermitente en Verde cambiando a Amarillo")
-
-			((and (>= (mod tiempo ciclo-semaforo) 216) (<= (mod tiempo ciclo-semaforo) 221))  "La luz ha cambiado de Verde a Amarillo")
-			((and (>= (mod tiempo ciclo-semaforo) 222) (<= (mod tiempo ciclo-semaforo) 224))  "Luz Intermitente en Amarillo cambiando a Rojo")
-		)
-	)
-)
-
-(Auditoria)

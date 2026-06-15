@@ -7,14 +7,14 @@
 ; Impacto: No Destructiva
 ; ----------------------------------------------------------------------------
 
-(defun transicion(estado_actual color-cambiar)
+(defun transicion(color-Actual cambiar-a)
 	(cond 
 		((and (equal color-Actual 'en-Verde) (equal cambiar-a 'amarillo)) ;cambio valido
-		(list (format nil "Intermitente-~a" color-Actual) (format nil "cambiar-a-~a" cambiar-a)))
+		(list color-Actual (format nil "cambiar-a-~a" cambiar-a)))
 		((and (equal color-Actual 'en-Amarillo) (equal cambiar-a 'rojo)) ;cambio valido
-		(list (format nil "Intermitente-~a" color-Actual) (format nil "cambiar-a-~a" cambiar-a)))
+		(list color-Actual (format nil "cambiar-a-~a" cambiar-a)))
 		((and (equal color-Actual 'en-Rojo) (equal cambiar-a 'verde)) ;cambio valido
-		(list (format nil "Intermitente-~a" color-Actual) (format nil "cambiar-a-~a" cambiar-a)))
+		(list color-Actual (format nil "cambiar-a-~a" cambiar-a)))
 		((and (equal color-Actual 'en-Verde) (equal cambiar-a 'rojo)) ;cambio NO valido
 		(list color-Actual "Cambio esperado: AMARILLO"))
 		((and (equal color-Actual 'en-Amarillo) (equal cambiar-a 'verde)) ;cambio NO valido
@@ -57,28 +57,29 @@
 ; Estrategia: Mediante la biblioteca "local-time" obtener la fecha pasada por medio de tiempo Unix.
 ; Impacto: No Destructiva
 ; ----------------------------------------------------------------------------
-(ql:quickload "local-time")
 
 (defun Auditoria()
 
-		(print "Ingrese su ID: ")
+		(format t "Ingrese su ID: ")
+		(finish-output)
 			(let ((id (read)))
-		(print "Ingrese la clave: ")
+		(format t "Ingrese la clave(1234): ")
+		(finish-output)
 			(let ((clave(read)))
-
 			(if (equal clave 1234)
-
 				(progn
-					(print "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
-						(let ((tiempo(read)))
+				  (format t "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
+				  (finish-output)
+					(let ((tiempo(read)))
 					(list (local-time:format-timestring nil
-					 								(local-time:unix-to-timestamp tiempo) :format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec))
-																    (calcular-tiempo  tiempo)))
+					(local-time:unix-to-timestamp tiempo) :format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec))
+					(calcular-tiempo  tiempo)))
 				)
 			)
 		)
 	)
 )
+;llamar solamente a (Auditoria)
 
 ; Funcion auxiliar para calcular el cambio de color del semaforo. 
 (defun calcular-tiempo (tiempo)
@@ -123,31 +124,18 @@
 	(let ((segundos-ciclo 216))
 
 		(cond
-			((= (mod (* minutos 60) segundos-ciclo) 0) (format nil "Ciclos Completados: ~a" (/ (* minutos 60)  segundos-ciclo))) ; si es 0 el resto, el ultimo ciclo fue completado
-			((> (mod (* minutos 60) segundos-ciclo) 0) (format nil "Ciclos Completados: ~a.Para completar el siguiente ciclo quedan: ~a segundos"
-													   (floor (/ (* minutos 60) segundos-ciclo)) (- segundos-ciclo (mod (* minutos 60) segundos-ciclo)))) ; si NO fue completado, que diga cuantos segundos transcurrieron
+			((= (mod (* minutos 60) segundos-ciclo) 0) 
+			(format nil "Ciclos Completados: ~a" (floor(/ (* minutos 60)  segundos-ciclo)))) ; si es 0 el resto, el ultimo ciclo fue completado
+			((> (mod (* minutos 60) segundos-ciclo) 0) 
+			(format nil "Ciclos Completados: ~a ~%~
+				         Para completar el siguiente ciclo quedan: ~a segundos"
+		    (floor (/ (* minutos 60) segundos-ciclo)) 
+		    (- segundos-ciclo (mod (* minutos 60) segundos-ciclo)))) ; si NO fue completado, que diga cuantos segundos transcurrieron
 			(t (list "Datos no Validos"))
 		)
 	)
 )
-
-
-
-
-
-;------------------------------------------------------------------------------------------------------
-;------------------------------------------------------------------------------------------------------
-;6to Requerimiento: Informe de Distribución Temporal
-
-(defun distribucion-temporal()
-
-	(let ((porcentaje-rojo (* (/ (* (/ 90 216) 3600) 3600) 100)) 
-		  (porcentaje-verde (* (/ (* (/ 120 216) 3600) 3600) 100)) 
-		  (porcentaje-amarillo (* (/ (* (/ 6 216) 3600) 3600) 100)))
-		(format t "Rojo: ,2f% | Verde: ,2f% | Amarillo: ,2f%" porcentaje-rojo porcentaje-verde porcentaje-amarillo)
-	)
-)
-(distribucion-temporal)
+;llamar solamente a (distribucion-temporal)
 
 
 
@@ -178,88 +166,3 @@
 ;(ciclos-por-tiempo 15); Ejemplo Valido
 ;(ciclos-por-tiempo 20); Ejemplo Valido
 ;(ciclos-por-tiempo d); Ejemplo Error
-
-
-;------------------------------------------------------------------------------------------------------
-;------------------------------------------------------------------------------------------------------
-;                                         ITERACION 2
-
-
-; Extension 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-;------------------------------------------------------------------------------------------------------
-;------------------------------------------------------------------------------------------------------
-; Extension 2
-
-(ql:quickload "local-time")
-
-(defun informe(datos)
-
-	(with-open-file (stream "informe-ejecucion-semaforo.txt" ; Poner direccion de archivo.
-					 :direction :output :if-exists :append)
-
-		(format stream "~%Informe de Ejecucion del Sistema Semaforico~%")
-		
-		(format stream "~a - [~a] --- Transición: ~a~%" (cadr datos) (car datos) (caddr datos))
-		(format stream "=========================================================")
-	)
-)
-
-; Funcion Principal ->
-
-(defun Auditoria()
-
-		(print "Ingrese su ID: ")
-			(let ((id (read)))
-		(print "Ingrese la clave: ")
-			(let ((clave(read)))
-
-			(if (equal clave 1234)
-
-				(progn
-					(print "Ingrese tiempo Unix para saber el color anterior y el siguiente: ")
-						(let ((tiempo(read)))
-					(let ((guardar-info
-								(list (format nil "Usuario: ~a|| Tiempo Unix ingresado: ~a" id tiempo)  (local-time:format-timestring nil
-										 								(local-time:unix-to-timestamp tiempo) :format '(:year "-" :month "-" :day " " :hour ":" :min ":" :sec))
-																					    (calcular-tiempo  tiempo))))
-						(informe guardar-info)
-						guardar-info	
-					)
-				)
-			)
-		)
-	)
-	)
-)
-
-; Calculamos con la modificacion de la Extension 1
-(defun calcular-tiempo (tiempo)
-
-	(let ((ciclo-semaforo 225))
-		(cond
-			((and (>= (mod tiempo ciclo-semaforo) 0) (<= (mod tiempo ciclo-semaforo) 89))  "La luz ha cambiado de Amarillo a Rojo")
-			((and (>= (mod tiempo ciclo-semaforo) 90) (<= (mod tiempo ciclo-semaforo) 92)) "Luz Intermitente en Rojo cambiando a Verde")
-
-			((and (>= (mod tiempo ciclo-semaforo) 93) (<= (mod tiempo ciclo-semaforo) 212))  "La luz ha cambiado de Rojo a Verde")	
-			((and (>= (mod tiempo ciclo-semaforo) 213) (<= (mod tiempo ciclo-semaforo) 215)) "Luz Intermitente en Verde cambiando a Amarillo")
-
-			((and (>= (mod tiempo ciclo-semaforo) 216) (<= (mod tiempo ciclo-semaforo) 221))  "La luz ha cambiado de Verde a Amarillo")
-			((and (>= (mod tiempo ciclo-semaforo) 222) (<= (mod tiempo ciclo-semaforo) 224))  "Luz Intermitente en Amarillo cambiando a Rojo")
-		)
-	)
-)
-
-(Auditoria)
