@@ -153,15 +153,21 @@
 ;------------------------------------------------------------------------------------------------------
 ;6to Requerimiento: Informe de Distribución Temporal
 
-(defun distribucion-temporal()
-
-	(let ((porcentaje-rojo (* (/ (* (/ 90 216) 3600) 3600) 100)) 
-		  (porcentaje-verde (* (/ (* (/ 120 216) 3600) 3600) 100)) 
-		  (porcentaje-amarillo (* (/ (* (/ 6 216) 3600) 3600) 100)))
-		(format t "Rojo: ,2f% | Verde: ,2f% | Amarillo: ,2f%" porcentaje-rojo porcentaje-verde porcentaje-amarillo)
-	)
+(defun distribucion-temporal ()
+  (let* ((ciclo 225)
+         (porcentaje-rojo (* (/ 90 ciclo) 100))
+         (porcentaje-verde (* (/ 120 ciclo) 100))
+         (porcentaje-amarillo (* (/ 6 ciclo) 100))
+         (porcentaje-intermitente (* (/ 9 ciclo) 100)))
+    (format t "Distribución Temporal en una hora~%~
+               Rojo: ~,2f%~%~
+               Verde: ~,2f%~%~
+               Amarillo: ~,2f%~%~
+               Intermitente: ~,2f%~%" 
+            porcentaje-rojo porcentaje-verde 
+            porcentaje-amarillo porcentaje-intermitente)
+   )
 )
-(distribucion-temporal)
 
 
 
