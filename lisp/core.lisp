@@ -103,6 +103,7 @@
 
 ;------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------
+
 ;Requerimiento 4 
 ;4a
 ; ----------------------------------------------------------------------------
@@ -160,9 +161,28 @@
 )
 ;llamar solamente a (distribucion-temporal)
 
-
-
 ;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
+
+
+;requerimiento 6
+; ----------------------------------------------------------------------------
+; Funcion: distribucion-temporal
+; Naturaleza: Impura (Imprime en pantalla, el porcentaje de tiempo que estuvo cada color durante 1 hora)
+; Estrategia: Calcular la distribucion teniendo en cuenta los segundos de duracion de cada color respecto a la duracion total del ciclo (216), pasarlo a hora y dividirlo en 1 hora.
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
+
+(defun distribucion-temporal()
+
+	(let ((porcentaje-rojo (* (/ (* (/ 90 216) 3600) 3600) 100)) (porcentaje-verde (* (/ (* (/ 120 216) 3600) 3600) 100)) 
+																					(porcentaje-amarillo (* (/ (* (/ 6 216) 3600) 3600) 100)))
+		(format t "Rojo: ,2f% | Verde: ,2f% | Amarillo: ,2f%" porcentaje-rojo porcentaje-verde porcentaje-amarillo)
+	)
+)
+(distribucion-temporal)
+
+
 ;------------------------------------------------------------------------------------------------------
 ;7to Requerimiento: Aseguramiento de la calidad
 ;Punto 1
