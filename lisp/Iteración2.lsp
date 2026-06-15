@@ -157,17 +157,18 @@
 	)
 )
 
+;------------------------------------------------------------------------------------------------------
+;------------------------------------------------------------------------------------------------------
 
 
-
-;6
+;6to Requerimiento: Informe de Distribución Temporal
 ;------------------------------------------------------------------------------------------------------
 ; Funcion: distribucion-temporal
 ; Naturaleza: Impura (Imprime en pantalla, el porcentaje de tiempo que estuvo cada color durante 1 hora)
 ; Estrategia: Calcular la distribucion teniendo en cuenta los segundos de duracion de cada color respecto a la duracion total del ciclo (216), pasarlo a hora y dividirlo en 1 hora.
 ; Impacto: No Destructiva
 ;------------------------------------------------------------------------------------------------------
-;6to Requerimiento: Informe de Distribución Temporal
+
 
 (defun distribucion-temporal ()
   (let* ((ciclo 225)
