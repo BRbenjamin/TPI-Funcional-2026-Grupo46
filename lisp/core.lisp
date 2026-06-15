@@ -136,7 +136,12 @@
 ;------------------------------------------------------------------------------------------------------
 
 ; 5to Requerimiento: Planificación Temporal
-
+; ----------------------------------------------------------------------------
+; Funcion: ciclos-por-tiempo
+; Naturaleza: Impura (Imprime en pantalla la cantidad de ciclos del semaforo completados)
+; Estrategia: Calcula la cantidad de ciclos mediante la funcion Mod. 
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
 (defun ciclos-por-tiempo(minutos)
 
 	(let ((segundos-ciclo 216))
