@@ -108,6 +108,12 @@
 ;------------------------------------------------------------------------------------------------------
 ;4to Requerimiento: Análisis de Ciclos Semafóricos
 ;4.a
+; ----------------------------------------------------------------------------
+; Funcion: duracion-ciclo
+; Naturaleza: Impura (Imprime en pantalla el porcentaje de duracion de cada color)
+; Estrategia: Segun la cantidad de segundos ingresados, se saca el porcentaje de tiempo de cada color.
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
 (defun duracion-ciclo (segundos)
   (let ((rojo (* segundos (/ 90 225))) (verde (* segundos (/ 120 225)))
   	    (amarillo (* segundos (/ 6 225)))(intermitente (* segundos (/ 9 225))))
@@ -119,6 +125,12 @@
    )
 )
 ;4.b
+; ----------------------------------------------------------------------------
+; Funcion: recomendacion-ciclo (Funcion Axiliar)
+; Naturaleza: Impura (Imprime en pantalla la recomendacion de la duracion del semaforo)
+; Estrategia: Segun que condicion cumpla se recomienda uno u otra. 
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
 (defun recomendacion-ciclo(ciclo)
 	(cond
 		((and (>= ciclo 35) (<= ciclo 150)) "La duración está en el rango óptimo")
