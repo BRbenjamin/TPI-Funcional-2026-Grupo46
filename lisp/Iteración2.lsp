@@ -108,16 +108,20 @@
 ;------------------------------------------------------------------------------------------------------
 ;4to Requerimiento: Análisis de Ciclos Semafóricos
 ;4.a
-(defun duracion-ciclo(tiempo-ciclo)
-	(cond
-		((and(>= tiempo-ciclo 35) (<= tiempo-ciclo 150)) T)
-		(t nil)
-	)
+(defun duracion-ciclo (segundos)
+  (let ((rojo (* segundos (/ 90 225))) (verde (* segundos (/ 120 225)))
+  	    (amarillo (* segundos (/ 6 225)))(intermitente (* segundos (/ 9 225))))
+    (format t "Duración para un Ciclo de ~a segundos~%~
+    	       Fase Roja:~,2f segundos~%~
+    	       Fase Verde:~,2f segundos~%~
+    	       Fase Amarilla:~,2f segundos~%~
+    	       Fases Intermitentes:~,2f segundos" segundos rojo verde amarillo intermitente)
+   )
 )
 ;4.b
 (defun recomendacion-ciclo(ciclo)
-
 	(cond
+		((and (>= ciclo 35) (<= ciclo 150)) "La duración está en el rango óptimo")
 		((< ciclo 35) (format nil "Recomendacion: Aumentar ~a segundos" (- 35 ciclo)))
 		((> ciclo 150) (format nil "Recomendacion: Recortar ~a segundos" (- ciclo 150)))
 	)
