@@ -36,13 +36,18 @@
 ; Impacto: No Destructiva
 ; ----------------------------------------------------------------------------
 
-(defun Temporizador(tiempo_Unix)
+(defun temporizador(tiempo_Unix)
 
-	(let ((duracion_Ciclo 216)) ; tiempo del ciclo completo	
+	(let ((tiempo 225)) ; tiempo del ciclo completo	
 		(cond
-			((and (>= (mod tiempo_Unix duracion_Ciclo) 0) (<= (mod tiempo_Unix duracion_Ciclo) 89)) 'Rojo)
-			((and (>= (mod tiempo_Unix duracion_Ciclo) 90) (<= (mod tiempo_Unix duracion_Ciclo) 209))  'Verde)
-			((and (>= (mod tiempo_Unix duracion_Ciclo) 210) (<= (mod tiempo_Unixduracion_Ciclo) 215)) 'Amarillo)
+			((and (>= (mod tiempo_Unix tiempo) 0) (<= (mod tiempo_Unix tiempo) 89))  'rojo)
+			((and (>= (mod tiempo_Unix tiempo) 90) (<= (mod tiempo_Unix tiempo) 92)) 'intermitente-amarillo)
+
+			((and (>= (mod tiempo_Unix tiempo) 93) (<= (mod tiempo_Unix tiempo) 212))  'verde)	
+			((and (>= (mod tiempo_Unix tiempo) 213) (<= (mod tiempo_Unix tiempo) 215)) 'intermitente-verde)
+
+			((and (>= (mod tiempo_Unix tiempo) 216) (<= (mod tiempo_Unix tiempo) 221))  'amarillo)
+			((and (>= (mod tiempo_Unix tiempo) 222) (<= (mod tiempo_Unix tiempo) 224))  'intermitente-amarillo)
 		)
 	)
 )
