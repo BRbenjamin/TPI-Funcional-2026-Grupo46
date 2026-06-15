@@ -81,7 +81,13 @@
 )
 ;llamar solamente a (Auditoria)
 
-; Funcion auxiliar para calcular el cambio de color del semaforo. 
+;Auditoria la funcion Aux
+; ----------------------------------------------------------------------------
+; Funcion: calcular-tiempo
+; Naturaleza: Pura (Mostrar cronologicamente el color anterior y el siguiente del semaforo)
+; Estrategia: Mediante el uso de mod y los segundos totales del ciclo (216), se obtiene la transicion del semaforo.
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
 (defun calcular-tiempo (tiempo)
 
 	(let ((ciclo-semaforo 216))
@@ -97,15 +103,27 @@
 
 ;------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------
-;4to Requerimiento: Análisis de Ciclos Semafóricos
-;4.a
+;Requerimiento 4 
+;4a
+; ----------------------------------------------------------------------------
+; Funcion: duracion-ciclo
+; Naturaleza: Impura (Imprime en pantalla el porcentaje de duracion de cada color)
+; Estrategia: Segun la cantidad de segundos ingresados, se saca el porcentaje de tiempo de cada color.
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
 (defun duracion-ciclo(tiempo-ciclo)
 	(cond
 		((and(>= tiempo-ciclo 35) (<= tiempo-ciclo 150)) T)
 		(t nil)
 	)
 )
-;4.b
+;4b
+; ----------------------------------------------------------------------------
+; Funcion: recomendacion-ciclo (Funcion Axiliar)
+; Naturaleza: Impura (Imprime en pantalla la recomendacion de la duracion del semaforo)
+; Estrategia: Segun que condicion cumpla se recomienda uno u otra. 
+; Impacto: No Destructiva
+; ----------------------------------------------------------------------------
 (defun recomendacion-ciclo(ciclo)
 
 	(cond
