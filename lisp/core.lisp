@@ -337,6 +337,7 @@
     	       Fase Verde:~,2f segundos~%~
     	       Fase Amarilla:~,2f segundos~%~
     	       Fases Intermitentes:~,2f segundos" segundos rojo verde amarillo intermitente)
+	   			(recomendacion-ciclo2 segundos)
    )
 )
 ;4.b
