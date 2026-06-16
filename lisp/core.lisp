@@ -1,4 +1,3 @@
-(ql:quickload "local-time")
 ;1er Requerimiento: Estados de Transición
 ; ----------------------------------------------------------------------------
 ; Funcion: Transicion
@@ -57,7 +56,7 @@
 ; Estrategia: Mediante la biblioteca "local-time" obtener la fecha pasada por medio de tiempo Unix.
 ; Impacto: No Destructiva
 ; ----------------------------------------------------------------------------
-
+(ql:quickload "local-time")
 (defun Auditoria()
 
 		(format t "Ingrese su ID: ")
