@@ -111,10 +111,16 @@
 ; Estrategia: Segun la cantidad de segundos ingresados, se saca el porcentaje de tiempo de cada color.
 ; Impacto: No Destructiva
 ; ----------------------------------------------------------------------------
-(defun duracion-ciclo(tiempo-ciclo)
-	(cond
-		((and(>= tiempo-ciclo 35) (<= tiempo-ciclo 150)) T)
-		(t nil)
+(defun duracion-ciclo(segundos)
+
+	(let ((rojo (* segundos 0.42)) (amarillo (* segundos 0.03)) (verde (* segundos 0.55)))
+	
+		(format t "Duracion en segundos de los colores:~%***Rojo ~,2f~% ~%*Verde ~,2f~% ~%**Amarillo ~,2f~% ~%"rojo verde amarillo)
+
+		(if (and (>= segundos 35) (<= segundos 150))
+			(format t "La duracion esta en el rango optimo")
+			(list "La duracion no esta en el rango optimo"  (recomendacion-ciclo segundos))
+		)
 	)
 )
 ;4b
@@ -125,13 +131,11 @@
 ; Impacto: No Destructiva
 ; ----------------------------------------------------------------------------
 (defun recomendacion-ciclo(ciclo)
-
 	(cond
 		((< ciclo 35) (format nil "Recomendacion: Aumentar ~a segundos" (- 35 ciclo)))
 		((> ciclo 150) (format nil "Recomendacion: Recortar ~a segundos" (- ciclo 150)))
 	)
 )
-
 ;------------------------------------------------------------------------------------------------------
 ;------------------------------------------------------------------------------------------------------
 
