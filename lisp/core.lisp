@@ -191,9 +191,9 @@
 ;(transicion 'en-Rojo 0) ; Ejemplo Error
 
 ; Punto 2
-;(timer 10000) ; Ejemplo Valido
-;(timer 12300) ; Ejemplo Valido
-;(timer i) ; Ejemplo Error
+;(Temporizador 10000) ; Ejemplo Valido
+;(Temporizador 12300) ; Ejemplo Valido
+;(Temporizador i) ; Ejemplo Error
 
 ; Punto 3
 ;1717958400 ; Ejemplo Valido
