@@ -117,9 +117,9 @@
 	
 		(format t "Duracion en segundos de los colores:~%***Rojo ~,2f~% ~%*Verde ~,2f~% ~%**Amarillo ~,2f~% ~%"rojo verde amarillo)
 
-		(if (and (>= segundos 35) (<= segundos 150))
-			(format t "La duracion esta en el rango optimo")
-			(list "La duracion no esta en el rango optimo"  (recomendacion-ciclo segundos))
+		(cond 
+			((and (>= segundos 35) (<= segundos 150)) T)
+			(t (recomendacion-ciclo segundos))
 		)
 	)
 )
