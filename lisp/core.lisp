@@ -362,7 +362,7 @@
 
 (defun ciclos-por-tiempo2(minutos)
 
-	(let ((segundos-ciclo 216))
+	(let ((segundos-ciclo 225))
 
 		(cond
 			((= (mod (* minutos 60) segundos-ciclo) 0) 
