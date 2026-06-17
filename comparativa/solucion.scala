@@ -49,18 +49,3 @@ object SistemaSemaforo {
     }
   }
 }
-
-import scala.io.StdIn.readLine
-
-@main def auditoriaInteractiva() = {
-  print("Ingrese tiempo Unix para saber el color: ")
-  val Color = readLine()
-  
-  // Convertimos el texto ingresado a número largo (Long)
-  val tiempo = Color.toLong 
-  
-  val resultado = SistemaSemaforo.temporizador(tiempo)
-  
-  // Imprime únicamente la respuesta pura
-  println(s"Color: $resultado")
-}
